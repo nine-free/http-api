@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:conf/*.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="demoAPI" class="com.soft1010.common.httpapi.ApiServiceFactoryBean">
+        <property name="timeout" value="6000"/>
+        <property name="serviceUrl" value="${service.url}"/>
+        <property name="serviceInterface" value="com.soft1010.common.httpapi.test.DemoAPI"/>
+        <property name="resultParser" ref="messageResultParser"/>
+    </bean>
+
+    <bean id="demoAPI2" class="com.soft1010.common.httpapi.ApiServiceFactoryBean">
+        <property name="timeout" value="6000"/>
+        <property name="serviceUrl" value="${service2.url}"/>
+        <property name="serviceInterface" value="com.soft1010.common.httpapi.test.DemoAPI2"/>
+        <property name="resultParser" ref="messageResultParser"/>
+    </bean>
+
+    <bean id="messageResultParser" class="com.soft1010.common.httpapi.parser.MessageApiResultParser"></bean>
+
+</beans>
